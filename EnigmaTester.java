@@ -7,7 +7,7 @@
 // Author:             (your name and email address)
 // Instructor's Name:  (name of your instructor)
 //
-/////////////////// PAIR PROGRAMMERS COMPLETE THIS SECTION ////////////////////
+//////////////////// PAIR PROGRAMMERS COMPLETE THIS SECTION ///////////////////
 //
 // Pair Partner:       (name of your pair programming partner)
 // Email:              (email address of your programming partner)
@@ -38,14 +38,18 @@ public class EnigmaTester {
 
     /**
      * Main method containing the test cases for the Enigma class
-     * @param String[] args - command line arguments that are unused
+     * @param String[] args - takes in 1 command line argument that represents
+     * the method to test
      * @return void
      */
     public static void main(String[] args) {
+        // print usage message if there isn't exactly 1 command line arg
         if (args.length != 1) {
             System.out.println("USAGE: java EnigmaTester <MethodToTest>");
             return;
         }
+
+        // determine which test to run based on command line arg
         String testName = args[0];
         switch (testName) {
             case "createRotor2dArray":
@@ -69,13 +73,21 @@ public class EnigmaTester {
         }
     }
 
+    /**
+     * Method that tests createRotor2dArray
+     *
+     * @ return void
+     */
     public static void testCreateRotor2dArray() {
-
         System.out.println("Testing createRotor2dArray...");
+
+        // param to pass in
         String[] rotors = {
             "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
         };
+
+        // The expected return
         char[][] expectedRotor2dArray = {{'A', 'B', 'C', 'D', 'E', 'F', 'G',
                                           'H', 'I', 'J', 'K', 'L', 'M', 'N',
                                           'O', 'P', 'Q', 'R', 'S', 'T', 'U',
@@ -84,30 +96,36 @@ public class EnigmaTester {
                                           'Q', 'V', 'Z', 'N', 'T', 'O', 'W',
                                           'Y', 'H', 'X', 'U', 'S', 'P', 'A',
                                           'I', 'B', 'R', 'C', 'J'}};
+        // call createRotor2dArray and save the returning 2d array
         char[][] actualRotor2dArray = Enigma.createRotor2dArray(rotors);
         System.out.println(
                 "Expected: " + Arrays.deepToString(expectedRotor2dArray));
         System.out.println(
                 "Actual: " + Arrays.deepToString(actualRotor2dArray));
 
+        // test fails if method returns null
         if (actualRotor2dArray == null) {
             System.out.println("Test Failed: actualRotor2dArray is null.");
             return;
         }
 
+        // compare number of rows
         if (expectedRotor2dArray.length != actualRotor2dArray.length) {
             System.out.println("Test Failed: # rows in arrays don't match.");
             return;
         }
+
+        // compare number of columns
         for (int i = 0; i < expectedRotor2dArray.length; i++) {
             if (expectedRotor2dArray[i].length
-                    != actualRotor2dArray[i].length) {
+            != actualRotor2dArray[i].length) {
                 System.out.println(
                         "Test Failed: # columns in arrays don't match.");
                 return;
             }
         }
 
+        // compare array elements
         for (int i = 0; i < expectedRotor2dArray.length; i++) {
             for (int j = 0; j < expectedRotor2dArray[i].length; j++) {
                 if (expectedRotor2dArray[i][j] != actualRotor2dArray[i][j]) {
@@ -117,13 +135,19 @@ public class EnigmaTester {
                 }
             }
         }
+        // otherwise, test passes
         System.out.println("Test Passed!");
     }
 
+    /**
+     * Method that tests selectRotors
+     *
+     * @ return void
+     */
     public static void testSelectRotors() {
 
         System.out.println("Testing selectRotors...");
-
+        //parameters to test with
         char[][] rotor2dArray = {{'A', 'B', 'C', 'D', 'E', 'F',
                                   'G', 'H', 'I', 'J', 'K', 'L',
                                   'M', 'N', 'O', 'P', 'Q', 'R',
@@ -146,7 +170,7 @@ public class EnigmaTester {
                                   'Q', 'O'}};
 
         String rotorsToUse = "2 1";
-
+        // expected return
         char[][] expectedSelectedRotors = {{'A', 'J', 'D', 'K', 'S', 'I',
                                             'R', 'U', 'X', 'B', 'L', 'H',
                                             'W', 'T', 'M', 'C', 'Q', 'G',
@@ -157,7 +181,7 @@ public class EnigmaTester {
                                             'O', 'W', 'Y', 'H', 'X', 'U',
                                             'S', 'P', 'A', 'I', 'B', 'R',
                                             'C', 'J'}};
-
+        // call selectRotors with parameters and save return array
         char[][] actualSelectedRotors =
                 Enigma.selectRotors(rotor2dArray, rotorsToUse);
         System.out.println(
@@ -165,14 +189,17 @@ public class EnigmaTester {
         System.out.println(
                 "Actual: " + Arrays.deepToString(actualSelectedRotors));
 
+        // test fails if returns null
         if (actualSelectedRotors == null) {
             System.out.println("Test Failed: actualSelectedRotors is null.");
             return;
         }
+        // compare number of rows
         if (expectedSelectedRotors.length != actualSelectedRotors.length) {
             System.out.println("Test Failed: # rows in arrays don't match.");
             return;
         }
+        // compare number of cols
         for (int i = 0; i < expectedSelectedRotors.length; i++) {
             if (expectedSelectedRotors[i].length
                     != actualSelectedRotors[i].length) {
@@ -181,7 +208,7 @@ public class EnigmaTester {
                 return;
             }
         }
-
+        // compare array elements
         for (int i = 0; i < expectedSelectedRotors.length; i++) {
             for (int j = 0; j < expectedSelectedRotors[i].length; j++) {
                 if (expectedSelectedRotors[i][j]
@@ -192,13 +219,19 @@ public class EnigmaTester {
                 }
             }
         }
+        //otherwise test passes
         System.out.println("Test Passed!");
     }
 
+    /**
+     * Method that tests rotateRotors
+     *
+     * @ return void
+     */
     public static void testRotateRotors() {
 
         System.out.println("Testing rotateRotors...");
-
+        //parameters to pass into method
         char[][] rotorsSelected = {{'A', 'J', 'D', 'K', 'S', 'I',
                                     'R', 'U', 'X', 'B', 'L', 'H',
                                     'W', 'T', 'M', 'C', 'Q', 'G',
@@ -210,7 +243,7 @@ public class EnigmaTester {
                                     'S', 'P', 'A', 'I', 'B', 'R',
                                     'C', 'J'}};
         String numRotations = "3";
-
+        // expected return
         char[][] expectedRotatedRotors = {{'V', 'O', 'E', 'A', 'J',
                                            'D', 'K', 'S', 'I', 'R',
                                            'U', 'X', 'B', 'L', 'H',
@@ -223,7 +256,7 @@ public class EnigmaTester {
                                            'O', 'W', 'Y', 'H', 'X',
                                            'U', 'S', 'P', 'A', 'I',
                                            'B'}};
-
+        // call rotateRotors with defined parameters and save return array
         char[][] actualRotatedRotors =
                 Enigma.rotateRotors(rotorsSelected, numRotations);
         System.out.println(
@@ -231,14 +264,17 @@ public class EnigmaTester {
         System.out.println(
                 "Actual: " + Arrays.deepToString(actualRotatedRotors));
 
+        // test fails if method returns null
         if (actualRotatedRotors == null) {
             System.out.println("Test Failed: actualRotatedRotors is null.");
             return;
         }
+        // compare number of rows
         if (expectedRotatedRotors.length != actualRotatedRotors.length) {
             System.out.println("Test Failed: # rows in arrays don't match.");
             return;
         }
+        // compare number of columns
         for (int i = 0; i < expectedRotatedRotors.length; i++) {
             if (expectedRotatedRotors[i].length
                     != actualRotatedRotors[i].length) {
@@ -247,7 +283,7 @@ public class EnigmaTester {
                 return;
             }
         }
-
+        // compare array elements
         for (int i = 0; i < expectedRotatedRotors.length; i++) {
             for (int j = 0; j < expectedRotatedRotors[i].length; j++) {
                 if (expectedRotatedRotors[i][j] != actualRotatedRotors[i][j]) {
@@ -257,12 +293,19 @@ public class EnigmaTester {
                 }
             }
         }
+        // otherwise, test passes
         System.out.println("Test Passed!");
     }
 
+    /**
+     * Method that tests encryptMessage
+     *
+     * @ return void
+     */
     public static void testEncryptMessage() {
         System.out.println("Testing encryptMessage...");
 
+        // parameters
         char[][] rotorsRotated = {{'V', 'O', 'E', 'A', 'J',
                                    'D', 'K', 'S', 'I', 'R',
                                    'U', 'X', 'B', 'L', 'H',
@@ -276,29 +319,33 @@ public class EnigmaTester {
                                    'U', 'S', 'P', 'A', 'I',
                                    'B'}};
         String inputText = "Annie is my TA!";
-
+        // expected return
         String expectedOutput = "SVVGD GJ CI WS!";
 
+        // call encryptMessage with defined parameters
+        // and save encrypted message
         String actualOutput = Enigma.encryptMessage(rotorsRotated, inputText);
-
         System.out.println("Expected: " + expectedOutput);
         System.out.println("Actual: " + actualOutput);
 
+        // test fails if message is null
         if (actualOutput == null) {
             System.out.println("Test Failed: actualOutput is null.");
             return;
         }
+        // compare length of strings
         if (expectedOutput.length() != actualOutput.length()) {
             System.out.println(
                     "Test Failed: The length of the strings do not match.");
             return;
         }
 
+        // compare String characters
         if(!expectedOutput.equals(actualOutput)) {
             System.out.println("Test Failed: The strings don't match.");
             return;
         }
-
+        // otherwise, test passes
         System.out.println("Test Passed!");
     }
 
